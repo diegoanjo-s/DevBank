@@ -28,3 +28,11 @@ API REST de um banco digital, desenvolvida com **Java 21** e **Spring Boot 4**, 
 git clone https://github.com/diegoanjo-s/DevBank.git
 cd DevBank
 ./mvnw spring-boot:run
+```
+
+A API sobe em `http://localhost:8080`.
+
+## 👨‍💻 Autor
+
+**Diego Anjos Aragão**
+[GitHub](https://github.com/diegoanjo-s) · [LinkedIn](https://linkedin.com/in/diegoanjo-s)
