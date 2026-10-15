@@ -16,9 +16,9 @@ API REST de um banco digital com Java 21 + Spring Boot 4 + Maven.
 - [x] Primeiro commit e push
 
 ## Fase 2 — Primeiro endpoint
-- [ ] Criar o pacote controller
-- [ ] Endpoint GET /hello
-- [ ] Testar no navegador e no Postman
+- [x] Criar o pacote controller
+- [x] Endpoint GET /hello
+- [x] Testar no navegador e no Postman
 
 ## Fase 3 — Clientes
 - [ ] Spring Data JPA + H2 + Validation
