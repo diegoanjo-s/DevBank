@@ -22,8 +22,6 @@ Use o recurso [Report a vulnerability](../../security/advisories/new) do GitHub 
 |---|---|
 | Monitoramento de dependências | CVEs em dependências são acompanhados e corrigidos via override de versão quando necessário |
 | Overrides de segurança | Tomcat e Jackson atualizados para versões corrigidas antes do patch oficial do Spring Boot |
-
-
 | Dependabot | Alertas e PRs automáticos para CVEs em dependências |
 | CodeQL | Análise estática do código a cada push |
 | Private vulnerability reporting | Canal privado para reportar falhas |
@@ -49,7 +47,3 @@ Use o recurso [Report a vulnerability](../../security/advisories/new) do GitHub 
 | Item | Justificativa |
 |---|---|
 | Logback CVE-2026-19880 | A funcionalidade vulnerável (MDC discriminator + FileAppender) não é utilizada. Será corrigido ao atualizar para Spring Boot 4.1.2+ |
-
-| Dependabot | Alertas e PRs automáticos para CVEs em dependências |
-| CodeQL | Análise estática do código a cada push |
-| Private vulnerability reporting | Canal privado para reportar falhas |

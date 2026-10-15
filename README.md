@@ -3,6 +3,8 @@
 API REST de um banco digital, desenvolvida com **Java 21** e **Spring Boot 4**, com foco em boas práticas de backend: arquitetura em camadas, regras de negócio bancárias, testes e segurança.
 
 > 🚧 **Projeto em desenvolvimento.** Acompanhe o progresso no [ROADMAP](ROADMAP.md).
+>
+> 🛡️ Veja como a segurança é tratada em [SECURITY.md](SECURITY.md).
 
 ## 🛠️ Tecnologias
 
