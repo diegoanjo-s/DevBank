@@ -76,4 +76,4 @@ API REST de um banco digital com Java 21 + Spring Boot 4 + Maven.
 
 ## 🛡️ Pendências técnicas
 - [ ] Atualizar para Spring Boot 4.1.2+ (logback CVE-2026-19880) e remover os overrides de tomcat/jackson
-- [ ] Dar permissão de execução ao mvnw (para Linux/Docker/CI)
+- [x] Dar permissão de execução ao mvnw (para Linux/Docker/CI)
