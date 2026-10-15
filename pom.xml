@@ -11,8 +11,8 @@
 	<groupId>com.devbank</groupId>
 	<artifactId>devbank</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name/>
-	<description/>
+	<name>DevBank</name>
+	<description>Digital banking REST API built with Java 21 and Spring Boot</description>
 	<url/>
 	<licenses>
 		<license/>
