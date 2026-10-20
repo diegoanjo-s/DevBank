@@ -4,10 +4,10 @@ import com.devbank.dto.ClienteRequest;
 import com.devbank.dto.ClienteResponse;
 import com.devbank.entity.Cliente;
 import com.devbank.repository.ClienteRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
@@ -22,6 +22,9 @@ public class ClienteService {
         String email = request.email().trim().toLowerCase();
 
         if (clienteRepository.existsByCpf(cpf)) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "CPF já cadastrado");
+        }
+        if (clienteRepository.existsByEmail(email)) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "E-mail já cadastrado");
         }
         Cliente cliente = new Cliente();
@@ -31,8 +34,9 @@ public class ClienteService {
 
         Cliente salvo = clienteRepository.save(cliente);
         return ClienteResponse.from(salvo);
-        }
-        private String somenteDigitos(String valor){
-            return valor.replaceAll("\\D", "");
+    }
+
+    private String somenteDigitos(String valor) {
+        return valor.replaceAll("\\D", "");
     }
 }
