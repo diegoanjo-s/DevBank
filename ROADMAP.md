@@ -24,9 +24,9 @@ API REST de um banco digital com Java 21 + Spring Boot 4 + Maven.
 - [x] Spring Data JPA + H2 + Validation
 - [x] Entidade Cliente
 - [x] Repository
-- [ ] Service
-- [ ] DTOs (records)
-- [ ] CRUD de clientes no Controller
+- [x] Service
+- [x] DTOs (records)
+- [x] CRUD de clientes no Controller
 
 ## Fase 4 — Tratamento de erros
 - [ ] Exceções personalizadas
