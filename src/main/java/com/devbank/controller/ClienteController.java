@@ -20,4 +20,8 @@ public class ClienteController {
     public ClienteResponse criar(@RequestBody @Valid ClienteRequest request) {
         return  clienteService.criar(request);
     }
+    @GetMapping("/{id}")
+    public ClienteResponse buscarPorId(@PathVariable Long id) {
+        return clienteService.buscarPorId(id);
+    }
 }

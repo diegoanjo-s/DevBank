@@ -36,6 +36,16 @@ public class ClienteService {
         return ClienteResponse.from(salvo);
     }
 
+    @Transactional(readOnly = true)
+    public ClienteResponse buscarPorId(Long id){
+        return ClienteResponse.from(buscarClientePorId(id));
+    }
+
+    private Cliente buscarClientePorId(Long id){
+        return clienteRepository.findById(id)
+                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado"));
+    }
+
     private String somenteDigitos(String valor) {
         return valor.replaceAll("\\D", "");
     }
