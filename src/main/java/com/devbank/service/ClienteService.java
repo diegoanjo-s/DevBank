@@ -4,12 +4,12 @@ import com.devbank.dto.ClienteRequest;
 import com.devbank.dto.ClienteResponse;
 import com.devbank.dto.ClienteUpdateRequest;
 import com.devbank.entity.Cliente;
+import com.devbank.exception.ConflitoException;
+import com.devbank.exception.RecursoNaoEncontradoException;
 import com.devbank.repository.ClienteRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -25,10 +25,10 @@ public class ClienteService {
         String email = request.email().trim().toLowerCase();
 
         if (clienteRepository.existsByCpf(cpf)) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "CPF já cadastrado");
+            throw new ConflitoException("CPF já cadastrado");
         }
         if (clienteRepository.existsByEmail(email)) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "E-mail já cadastrado");
+            throw new ConflitoException("E-mail já cadastrado");
         }
         Cliente cliente = new Cliente();
         cliente.setNome(request.nome().trim());
@@ -46,7 +46,7 @@ public class ClienteService {
 
     private Cliente buscarClientePorId(Long id) {
         return clienteRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Cliente não encontrado"));
     }
 
     @Transactional(readOnly = true)
@@ -63,7 +63,7 @@ public class ClienteService {
         String email = upRequest.email().trim().toLowerCase();
 
         if (clienteRepository.existsByEmailAndIdNot(email, id)) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "E-mail já cadastrado");
+            throw new ConflitoException("E-mail já cadastrado");
         }
         cliente.setNome(upRequest.nome().trim());
         cliente.setEmail(email);
