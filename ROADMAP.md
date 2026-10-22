@@ -15,12 +15,12 @@ API REST de um banco digital com Java 21 + Spring Boot 4 + Maven.
 - [x] Rodar a aplicação (Tomcat na porta 8080)
 - [x] Primeiro commit e push
 
-## Fase 2 — Primeiro endpoint
+## Fase 2 — Primeiro endpoint ✅
 - [x] Criar o pacote controller
 - [x] Endpoint GET /hello
 - [x] Testar no navegador e no Postman
 
-## Fase 3 — Clientes
+## Fase 3 — Clientes ✅
 - [x] Spring Data JPA + H2 + Validation
 - [x] Entidade Cliente
 - [x] Repository
@@ -28,10 +28,10 @@ API REST de um banco digital com Java 21 + Spring Boot 4 + Maven.
 - [x] DTOs (records)
 - [x] CRUD de clientes no Controller
 
-## Fase 4 — Tratamento de erros
-- [ ] Exceções personalizadas
-- [ ] @RestControllerAdvice
-- [ ] Respostas de erro padronizadas
+## Fase 4 — Tratamento de erros ✅
+- [x] Exceções personalizadas
+- [x] @RestControllerAdvice
+- [x] Respostas de erro padronizadas
 
 ## Fase 5 — Contas
 - [ ] Entidade Conta
