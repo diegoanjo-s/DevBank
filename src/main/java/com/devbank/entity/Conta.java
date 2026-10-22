@@ -38,10 +38,10 @@ public class Conta {
     @Column(nullable = false, updatable = false)
     private LocalDateTime dataAbertura;
 
-    public Conta(Cliente cliente, String numero) {
+    public Conta(Cliente cliente, String numero, BigDecimal saldoInicial) {
         this.cliente = cliente;
         this.numero = numero;
-        this.saldo = BigDecimal.ZERO;
+        this.saldo = saldoInicial;
         this.status = StatusConta.ATIVA;
     }
 
