@@ -7,6 +7,7 @@ import com.devbank.entity.Cliente;
 import com.devbank.exception.ConflitoException;
 import com.devbank.exception.RecursoNaoEncontradoException;
 import com.devbank.repository.ClienteRepository;
+import com.devbank.repository.ContaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,7 @@ import java.util.List;
 public class ClienteService {
 
     private final ClienteRepository clienteRepository;
+    private final ContaRepository contaRepository;
 
     @Transactional
     public ClienteResponse criar(ClienteRequest request) {
@@ -74,6 +76,10 @@ public class ClienteService {
     @Transactional
     public void deletar(Long id) {
         Cliente cliente = buscarClientePorId(id);
+
+        if (contaRepository.existsByClienteId(id)) {
+            throw new ConflitoException("Cliente possui contas e não pode ser removido");
+        }
         clienteRepository.delete(cliente);
     }
 
