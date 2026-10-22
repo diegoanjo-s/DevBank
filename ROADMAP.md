@@ -33,12 +33,12 @@ API REST de um banco digital com Java 21 + Spring Boot 4 + Maven.
 - [x] @RestControllerAdvice
 - [x] Respostas de erro padronizadas
 
-## Fase 5 — Contas
-- [ ] Entidade Conta
-- [ ] Relacionamento Cliente ↔ Conta
-- [ ] Abrir conta
-- [ ] Consultar saldo
-- [ ] Encerrar conta
+## Fase 5 — Contas ✅
+- [x] Entidade Conta
+- [x] Relacionamento Cliente ↔ Conta
+- [x] Abrir conta
+- [x] Consultar saldo
+- [x] Encerrar conta
 
 ## Fase 6 — Transações
 - [ ] Entidade Transação
