@@ -26,6 +26,12 @@ public class GlobalExceptionHandler {
         return new ErroResponse(409, ex.getMessage(), List.of(), LocalDateTime.now());
     }
 
+    @ExceptionHandler(RegraNegocioException.class)
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    public ErroResponse tratarRegraNegocio(RegraNegocioException ex) {
+        return new ErroResponse(422, ex.getMessage(), List.of(), LocalDateTime.now());
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErroResponse tratarValidacao(MethodArgumentNotValidException ex) {
