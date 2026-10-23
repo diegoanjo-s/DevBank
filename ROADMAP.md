@@ -40,13 +40,13 @@ API REST de um banco digital com Java 21 + Spring Boot 4 + Maven.
 - [x] Consultar saldo
 - [x] Encerrar conta
 
-## Fase 6 — Transações
-- [ ] Entidade Transação
-- [ ] Depósito
-- [ ] Saque
-- [ ] Transferência
-- [ ] @Transactional
-- [ ] Regras de negócio (saldo insuficiente, conta inativa)
+## Fase 6 — Transações ✅
+- [x] Entidade Transação
+- [x] Depósito
+- [x] Saque
+- [x] Transferência
+- [x] @Transactional
+- [x] Regras de negócio (saldo insuficiente, conta inativa)
 
 ## Fase 7 — Extrato
 - [ ] Listar transações de uma conta
