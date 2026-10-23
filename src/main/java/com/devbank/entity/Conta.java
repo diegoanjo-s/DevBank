@@ -54,5 +54,32 @@ public class Conta {
         }
         status = StatusConta.ENCERRADA;
     }
+
+    public void depositar(BigDecimal valor) {
+        validarValor(valor);
+        validarAtiva();
+        saldo = saldo.add(valor);
+    }
+
+    public void sacar(BigDecimal valor) {
+        validarValor(valor);
+        validarAtiva();
+        if (valor.compareTo(saldo) > 0) {
+            throw new RegraNegocioException("Saldo insuficiente");
+        }
+        saldo = saldo.subtract(valor);
+    }
+
+    private void validarValor(BigDecimal valor) {
+        if (valor == null || valor.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new RegraNegocioException("O valor deve ser maior que zero");
+        }
+    }
+
+    private void validarAtiva() {
+        if (status != StatusConta.ATIVA) {
+            throw new RegraNegocioException("Conta encerrada não pode movimentar valores");
+        }
+    }
 }
 
