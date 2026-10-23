@@ -48,10 +48,10 @@ API REST de um banco digital com Java 21 + Spring Boot 4 + Maven.
 - [x] @Transactional
 - [x] Regras de negócio (saldo insuficiente, conta inativa)
 
-## Fase 7 — Extrato
-- [ ] Listar transações de uma conta
-- [ ] Paginação
-- [ ] Filtro por período
+## Fase 7 — Extrato ✅
+- [x] Listar transações de uma conta
+- [x] Paginação
+- [x] Filtro por período
 
 ## Fase 8 — Testes
 - [ ] Testes unitários dos Services (JUnit + Mockito)
