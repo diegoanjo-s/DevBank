@@ -2,6 +2,7 @@ package com.devbank.controller;
 
 import com.devbank.dto.ContaResponse;
 import com.devbank.dto.OperacaoRequest;
+import com.devbank.dto.TransferenciaRequest;
 import com.devbank.service.TransacaoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,5 +22,10 @@ public class TransacaoController {
     @PostMapping("/contas/{id}/saque")
     public ContaResponse sacar(@PathVariable Long id, @RequestBody @Valid OperacaoRequest request) {
         return transacaoService.sacar(id, request);
+    }
+
+    @PostMapping("/transferencias")
+    public ContaResponse transferir(@RequestBody @Valid TransferenciaRequest request) {
+        return transacaoService.transferir(request);
     }
 }
