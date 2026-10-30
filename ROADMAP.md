@@ -54,10 +54,10 @@ API REST de um banco digital com Java 21 + Spring Boot 4 + Maven.
 - [x] Filtro por período
 
 ## Fase 8 — Testes
-- [ ] Testes unitários dos Services (JUnit + Mockito)
-- [ ] Testes dos Controllers (MockMvc)
-- [ ] Testes de integração
-- [ ] Ajustar o aviso do Mockito (agent)
+- [x] Testes unitários dos Services (JUnit + Mockito)
+- [x] Testes dos Controllers (MockMvc)
+- [x] Testes de integração
+- [x] Ajustar o aviso do Mockito (agent)
 - [ ] Cobertura de testes
 
 ## Fase 9 — Produção
