@@ -65,7 +65,7 @@ API REST de um banco digital com Java 21 + Spring Boot 4 + Maven.
 - [ ] PostgreSQL
 - [ ] Flyway (migrations)
 - [ ] Docker + Docker Compose
-- [ ] Profiles (dev / prod)
+- [x] Profiles (dev / prod)
 
 ## Fase 10 — Segurança
 - [ ] Spring Security
