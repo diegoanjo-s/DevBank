@@ -62,9 +62,9 @@ API REST de um banco digital com Java 21 + Spring Boot 4 + Maven.
 
 ## Fase 9 — Produção
 - [x] Swagger / OpenAPI
-- [ ] PostgreSQL
+- [x] PostgreSQL
 - [ ] Flyway (migrations)
-- [ ] Docker + Docker Compose
+- [x] Docker + Docker Compose
 - [x] Profiles (dev / prod)
 
 ## Fase 10 — Segurança
