@@ -9,6 +9,7 @@ import com.devbank.exception.RecursoNaoEncontradoException;
 import com.devbank.repository.ClienteRepository;
 import com.devbank.repository.ContaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,7 @@ public class ClienteService {
 
     private final ClienteRepository clienteRepository;
     private final ContaRepository contaRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional
     public ClienteResponse criar(ClienteRequest request) {
@@ -36,6 +38,7 @@ public class ClienteService {
         cliente.setNome(request.nome().trim());
         cliente.setCpf(cpf);
         cliente.setEmail(email);
+        cliente.setSenha(passwordEncoder.encode(request.senha()));
 
         Cliente salvo = clienteRepository.save(cliente);
         return ClienteResponse.from(salvo);
