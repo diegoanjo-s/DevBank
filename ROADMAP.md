@@ -60,12 +60,12 @@ API REST de um banco digital com Java 21 + Spring Boot 4 + Maven.
 - [x] Ajustar o aviso do Mockito (agent)
 - [x] Cobertura de testes
 
-## Fase 9 — Produção
+## Fase 9 — Produção ✅
 - [x] Swagger / OpenAPI
-- [ ] PostgreSQL
-- [ ] Flyway (migrations)
-- [ ] Docker + Docker Compose
-- [ ] Profiles (dev / prod)
+- [x] PostgreSQL
+- [x] Flyway (migrations)
+- [x] Docker + Docker Compose
+- [x] Profiles (dev / prod)
 
 ## Fase 10 — Segurança
 - [ ] Spring Security
