@@ -1,12 +1,14 @@
 package com.devbank.controller;
 
 import com.devbank.dto.HelloResponse;
+import io.swagger.v3.oas.annotations.Hidden;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 
+@Hidden
 @RestController
 public class HelloController {
 

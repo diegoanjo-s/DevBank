@@ -61,7 +61,7 @@ API REST de um banco digital com Java 21 + Spring Boot 4 + Maven.
 - [x] Cobertura de testes
 
 ## Fase 9 — Produção
-- [ ] Swagger / OpenAPI
+- [x] Swagger / OpenAPI
 - [ ] PostgreSQL
 - [ ] Flyway (migrations)
 - [ ] Docker + Docker Compose
@@ -75,5 +75,5 @@ API REST de um banco digital com Java 21 + Spring Boot 4 + Maven.
 - [ ] Cada cliente acessa só os próprios dados
 
 ## 🛡️ Pendências técnicas
-- [ ] Atualizar para Spring Boot 4.1.2+ (logback CVE-2026-19880) e remover os overrides de tomcat/jackson
+- [x] Atualizar para Spring Boot 4.1.2+ (logback CVE-2026-19880) e remover os overrides de tomcat/jackson
 - [x] Dar permissão de execução ao mvnw (para Linux/Docker/CI)
