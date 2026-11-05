@@ -1,7 +1,7 @@
 package com.devbank.service;
 
-import com.devbank.dto.ClienteResponse;
 import com.devbank.dto.LoginRequest;
+import com.devbank.dto.LoginResponse;
 import com.devbank.entity.Cliente;
 import com.devbank.exception.CredenciaisInvalidasException;
 import com.devbank.repository.ClienteRepository;
@@ -17,6 +17,8 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -27,6 +29,9 @@ class AuthServiceTest {
 
     @Mock
     private PasswordEncoder passwordEncoder;
+
+    @Mock
+    private TokenService tokenService;
 
     @InjectMocks
     private AuthService authService;
@@ -41,18 +46,19 @@ class AuthServiceTest {
     }
 
     @Test
-    @DisplayName("Login com senha correta deve devolver o cliente")
+    @DisplayName("Login com senha correta deve devolver o token")
     void deveFazerLogin() {
         when(clienteRepository.findByEmail("diego@email.com")).thenReturn(Optional.of(clienteDeTeste()));
         when(passwordEncoder.matches("senha123", "hash")).thenReturn(true);
+        when(tokenService.gerar(any())).thenReturn(new LoginResponse("token-falso", "Bearer", 3600));
 
-        ClienteResponse resposta = authService.login(new LoginRequest(" Diego@Email.com ", "senha123"));
+        LoginResponse resposta = authService.login(new LoginRequest(" Diego@Email.com ", "senha123"));
 
-        assertThat(resposta.email()).isEqualTo("diego@email.com");
+        assertThat(resposta.token()).isEqualTo("token-falso");
     }
 
     @Test
-    @DisplayName("Senha errada deve ser recusada")
+    @DisplayName("Senha errada deve ser recusada e não gerar token")
     void deveRecusarSenhaErrada() {
         when(clienteRepository.findByEmail("diego@email.com")).thenReturn(Optional.of(clienteDeTeste()));
         when(passwordEncoder.matches("errada", "hash")).thenReturn(false);
@@ -60,6 +66,8 @@ class AuthServiceTest {
         assertThatThrownBy(() -> authService.login(new LoginRequest("diego@email.com", "errada")))
                 .isInstanceOf(CredenciaisInvalidasException.class)
                 .hasMessage("E-mail ou senha inválidos");
+
+        verifyNoInteractions(tokenService);
     }
 
     @Test
@@ -70,5 +78,7 @@ class AuthServiceTest {
         assertThatThrownBy(() -> authService.login(new LoginRequest("ninguem@email.com", "senha123")))
                 .isInstanceOf(CredenciaisInvalidasException.class)
                 .hasMessage("E-mail ou senha inválidos");
+
+        verifyNoInteractions(tokenService);
     }
 }

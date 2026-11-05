@@ -1,7 +1,7 @@
 package com.devbank.service;
 
-import com.devbank.dto.ClienteResponse;
 import com.devbank.dto.LoginRequest;
+import com.devbank.dto.LoginResponse;
 import com.devbank.entity.Cliente;
 import com.devbank.exception.CredenciaisInvalidasException;
 import com.devbank.repository.ClienteRepository;
@@ -16,9 +16,10 @@ public class AuthService {
 
     private final ClienteRepository clienteRepository;
     private final PasswordEncoder passwordEncoder;
+    private final TokenService tokenService;
 
     @Transactional(readOnly = true)
-    public ClienteResponse login(LoginRequest request) {
+    public LoginResponse login(LoginRequest request) {
         String email = request.email().trim().toLowerCase();
 
         Cliente cliente = clienteRepository.findByEmail(email)
@@ -28,6 +29,6 @@ public class AuthService {
             throw new CredenciaisInvalidasException();
         }
 
-        return ClienteResponse.from(cliente);
+        return tokenService.gerar(cliente.getId());
     }
 }

@@ -1,7 +1,7 @@
 package com.devbank.controller;
 
-import com.devbank.dto.ClienteResponse;
 import com.devbank.dto.LoginRequest;
+import com.devbank.dto.LoginResponse;
 import com.devbank.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -20,9 +20,9 @@ public class AuthController {
 
     private final AuthService authService;
 
-    @Operation(summary = "Confere o e-mail e a senha do cliente")
+    @Operation(summary = "Confere e-mail e senha e devolve o token de acesso")
     @PostMapping("/login")
-    public ClienteResponse login(@RequestBody @Valid LoginRequest request) {
+    public LoginResponse login(@RequestBody @Valid LoginRequest request) {
         return authService.login(request);
     }
 }
