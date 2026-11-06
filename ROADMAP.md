@@ -68,10 +68,10 @@ API REST de um banco digital com Java 21 + Spring Boot 4 + Maven.
 - [x] Profiles (dev / prod)
 
 ## Fase 10 — Segurança
-- [ ] Spring Security
-- [ ] Cadastro e login
-- [ ] JWT
-- [ ] Proteger endpoints
+- [x] Spring Security
+- [x] Cadastro e login
+- [x] JWT
+- [x] Proteger endpoints
 - [ ] Cada cliente acessa só os próprios dados
 
 ## 🛡️ Pendências técnicas
