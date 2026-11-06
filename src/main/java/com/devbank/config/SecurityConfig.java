@@ -1,8 +1,11 @@
 package com.devbank.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -20,7 +23,10 @@ import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 
 @Configuration
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final AutenticacaoEntryPoint autenticacaoEntryPoint;
 
     @Value("${devbank.jwt.segredo}")
     private String segredo;
@@ -31,7 +37,14 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(sessao -> sessao.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
-                .authorizeHttpRequests(regras -> regras.anyRequest().permitAll())
+                .authorizeHttpRequests(regras -> regras
+                        .requestMatchers(HttpMethod.POST, "/auth/login", "/clientes").permitAll()
+                        .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").permitAll()
+                        .requestMatchers("/h2-console/**", "/error").permitAll()
+                        .anyRequest().authenticated())
+                .oauth2ResourceServer(oauth2 -> oauth2
+                        .authenticationEntryPoint(autenticacaoEntryPoint)
+                        .jwt(Customizer.withDefaults()))
                 .build();
     }
 

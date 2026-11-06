@@ -4,6 +4,7 @@ import com.devbank.dto.LoginRequest;
 import com.devbank.dto.LoginResponse;
 import com.devbank.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ public class AuthController {
 
     private final AuthService authService;
 
+    @SecurityRequirements
     @Operation(summary = "Confere e-mail e senha e devolve o token de acesso")
     @PostMapping("/login")
     public LoginResponse login(@RequestBody @Valid LoginRequest request) {

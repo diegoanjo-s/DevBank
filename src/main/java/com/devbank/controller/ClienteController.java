@@ -5,6 +5,7 @@ import com.devbank.dto.ClienteResponse;
 import com.devbank.dto.ClienteUpdateRequest;
 import com.devbank.service.ClienteService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ public class ClienteController {
 
     private final ClienteService clienteService;
 
+    @SecurityRequirements
     @Operation(summary = "Cadastra um cliente")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
