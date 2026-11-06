@@ -72,7 +72,7 @@ API REST de um banco digital com Java 21 + Spring Boot 4 + Maven.
 - [x] Cadastro e login
 - [x] JWT
 - [x] Proteger endpoints
-- [ ] Cada cliente acessa só os próprios dados
+- [x] Cada cliente acessa só os próprios dados
 
 ## 🛡️ Pendências técnicas
 - [x] Atualizar para Spring Boot 4.1.2+ (logback CVE-2026-19880) e remover os overrides de tomcat/jackson
