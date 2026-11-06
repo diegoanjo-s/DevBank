@@ -2,29 +2,54 @@
 
 API REST de um banco digital, desenvolvida com **Java 21** e **Spring Boot 4**, com foco em boas práticas de backend: arquitetura em camadas, regras de negócio bancárias, testes e segurança.
 
-> 🚧 **Projeto em desenvolvimento.** Acompanhe o progresso no [ROADMAP](ROADMAP.md).
+> ⚠️ **Banco fictício, para estudo e portfólio.** O saldo é simulado e não há dinheiro de verdade. Não use dados reais.
 >
-> 🛡️ Veja como a segurança é tratada em [SECURITY.md](SECURITY.md).
+> 📋 Veja o progresso no [ROADMAP](ROADMAP.md) e como a segurança é tratada em [SECURITY.md](SECURITY.md).
 
 ## 🛠️ Tecnologias
 
-- Java 21
-- Spring Boot 4 (Web MVC)
-- Maven
-- Lombok
-- *Em breve:* Spring Data JPA, H2, PostgreSQL, Flyway, Spring Security + JWT, Swagger, Docker, JUnit 5 + Mockito
+- Java 21 e Spring Boot 4 (Web MVC)
+- Spring Data JPA, H2 (desenvolvimento) e PostgreSQL 17 (produção)
+- Flyway para as migrations do banco
+- Spring Security com JWT e senhas protegidas com BCrypt
+- Bean Validation e Swagger (OpenAPI)
+- JUnit 5, Mockito e MockMvc
+- Docker e Docker Compose
+- Maven e Lombok
 
-## ✨ Funcionalidades (planejadas)
+## ✨ Funcionalidades
 
 - 👤 Cadastro e gestão de clientes
-- 🏦 Abertura e encerramento de contas
-- 💸 Depósito, saque e transferência entre contas
-- 📄 Extrato com paginação
-- 🔐 Autenticação com JWT
+- 🔐 Login com token JWT
+- 🛡️ Cada cliente acessa só os próprios dados
+- 🏦 Abertura e encerramento de contas, com saldo inicial simulado de R$ 300,00
+- 💸 Depósito, saque e transferência entre contas, tudo ou nada
+- 📄 Extrato com filtro por período e paginação
+
+## 🔗 Endpoints
+
+| Método | Rota | Descrição | Token |
+|---|---|---|---|
+| POST | `/clientes` | Cadastra um cliente | Não |
+| POST | `/auth/login` | Faz login e devolve o token | Não |
+| GET | `/clientes/{id}` | Busca os próprios dados | Sim |
+| PUT | `/clientes/{id}` | Atualiza nome e e-mail | Sim |
+| DELETE | `/clientes/{id}` | Remove o próprio cadastro | Sim |
+| POST | `/contas` | Abre uma conta | Sim |
+| GET | `/contas/{id}` | Consulta a conta e o saldo | Sim |
+| PATCH | `/contas/{id}/encerrar` | Encerra uma conta com saldo zero | Sim |
+| POST | `/contas/{id}/deposito` | Deposita um valor | Sim |
+| POST | `/contas/{id}/saque` | Saca um valor | Sim |
+| POST | `/transferencias` | Transfere entre contas | Sim |
+| GET | `/contas/{id}/extrato` | Consulta o extrato | Sim |
+
+Para usar o token, envie o cabeçalho `Authorization: Bearer <token>`. Na documentação interativa, use o botão **Authorize**.
 
 ## ▶️ Como rodar
 
-**Pré-requisitos:** Java 21
+### Desenvolvimento (H2 em memória)
+
+**Pré-requisito:** Java 21
 
 ```bash
 git clone https://github.com/diegoanjo-s/DevBank.git
@@ -32,7 +57,42 @@ cd DevBank
 ./mvnw spring-boot:run
 ```
 
-A API sobe em `http://localhost:8080`.
+Este modo já cria dados de teste: `diego@email.com`, `maria@email.com` e `joao@email.com`, todos com a senha `senha123`.
+
+### Com Docker (PostgreSQL)
+
+**Pré-requisito:** Docker
+
+```bash
+git clone https://github.com/diegoanjo-s/DevBank.git
+cd DevBank
+cp .env.example .env
+```
+
+Abra o `.env` e troque `DB_PASSWORD` e `JWT_SECRET`. O `JWT_SECRET` precisa ter pelo menos 32 caracteres, e este comando gera um valor adequado:
+
+```bash
+openssl rand -hex 48
+```
+
+Depois, suba a aplicação:
+
+```bash
+docker compose up --build
+```
+
+Este modo começa sem dados: cadastre um cliente em `POST /clientes` para testar.
+
+### Depois de subir
+
+- API: `http://localhost:8080`
+- Documentação interativa: `http://localhost:8080/swagger-ui.html`
+
+## 🧪 Testes
+
+```bash
+./mvnw test
+```
 
 ## 👨‍💻 Autor
 
