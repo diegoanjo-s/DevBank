@@ -13,8 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class ClienteService {
@@ -22,6 +20,7 @@ public class ClienteService {
     private final ClienteRepository clienteRepository;
     private final ContaRepository contaRepository;
     private final PasswordEncoder passwordEncoder;
+    private final ClienteAutenticado clienteAutenticado;
 
     @Transactional
     public ClienteResponse criar(ClienteRequest request) {
@@ -46,6 +45,7 @@ public class ClienteService {
 
     @Transactional(readOnly = true)
     public ClienteResponse buscarPorId(Long id) {
+        clienteAutenticado.validarDono(id);
         return ClienteResponse.from(buscarClientePorId(id));
     }
 
@@ -54,16 +54,9 @@ public class ClienteService {
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Cliente não encontrado"));
     }
 
-    @Transactional(readOnly = true)
-    public List<ClienteResponse> listar() {
-        return clienteRepository.findAll()
-                .stream()
-                .map(ClienteResponse::from)
-                .toList();
-    }
-
     @Transactional
     public ClienteResponse atualizar(Long id, ClienteUpdateRequest upRequest) {
+        clienteAutenticado.validarDono(id);
         Cliente cliente = buscarClientePorId(id);
         String email = upRequest.email().trim().toLowerCase();
 
@@ -78,6 +71,7 @@ public class ClienteService {
 
     @Transactional
     public void deletar(Long id) {
+        clienteAutenticado.validarDono(id);
         Cliente cliente = buscarClientePorId(id);
 
         if (contaRepository.existsByClienteId(id)) {

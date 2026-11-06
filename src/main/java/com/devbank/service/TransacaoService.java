@@ -24,10 +24,11 @@ public class TransacaoService {
 
     private final ContaRepository contaRepository;
     private final TransacaoRepository transacaoRepository;
+    private final ClienteAutenticado clienteAutenticado;
 
     @Transactional
     public ContaResponse depositar(Long contaId, OperacaoRequest request) {
-        Conta conta = buscarConta(contaId);
+        Conta conta = buscarContaDoCliente(contaId);
         conta.depositar(request.valor());
         transacaoRepository.save(new Transacao(conta, TipoTransacao.DEPOSITO, request.valor()));
         return ContaResponse.from(conta);
@@ -35,7 +36,7 @@ public class TransacaoService {
 
     @Transactional
     public ContaResponse sacar(Long contaId, OperacaoRequest request) {
-        Conta conta = buscarConta(contaId);
+        Conta conta = buscarContaDoCliente(contaId);
         conta.sacar(request.valor());
         transacaoRepository.save(new Transacao(conta, TipoTransacao.SAQUE, request.valor()));
         return ContaResponse.from(conta);
@@ -47,7 +48,7 @@ public class TransacaoService {
             throw new RegraNegocioException("Não é possível transferir para a mesma conta");
         }
 
-        Conta origem = buscarConta(request.contaOrigemId());
+        Conta origem = buscarContaDoCliente(request.contaOrigemId());
         Conta destino = buscarConta(request.contaDestinoId());
 
         origem.sacar(request.valor());
@@ -61,7 +62,7 @@ public class TransacaoService {
 
     @Transactional(readOnly = true)
     public ExtratoResponse extrato(Long contaId, LocalDate inicio, LocalDate fim, int pagina, int tamanho) {
-        Conta conta = buscarConta(contaId);
+        Conta conta = buscarContaDoCliente(contaId);
 
         LocalDate dataFim = (fim != null) ? fim : LocalDate.now();
         LocalDate dataInicio = (inicio != null) ? inicio : dataFim.minusDays(30);
@@ -93,6 +94,12 @@ public class TransacaoService {
                 resultado.getTotalPages(),
                 resultado.getTotalElements()
         );
+    }
+
+    private Conta buscarContaDoCliente(Long id) {
+        Conta conta = buscarConta(id);
+        clienteAutenticado.validarDono(conta.getCliente().getId());
+        return conta;
     }
 
     private Conta buscarConta(Long id) {

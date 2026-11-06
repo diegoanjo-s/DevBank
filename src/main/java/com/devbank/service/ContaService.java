@@ -23,12 +23,15 @@ public class ContaService {
 
     private final ContaRepository contaRepository;
     private final ClienteRepository clienteRepository;
+    private final ClienteAutenticado clienteAutenticado;
 
     @Value("${devbank.saldo-inicial}")
     private BigDecimal saldoInicial;
 
     @Transactional
     public ContaResponse abrir(AbrirContaRequest request) {
+        clienteAutenticado.validarDono(request.clienteId());
+
         Cliente cliente = clienteRepository.findById(request.clienteId())
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Cliente não encontrado"));
 
@@ -43,19 +46,21 @@ public class ContaService {
 
     @Transactional(readOnly = true)
     public ContaResponse buscarPorId(Long id) {
-        return ContaResponse.from(buscarContaPorId(id));
+        return ContaResponse.from(buscarContaDoCliente(id));
     }
 
     @Transactional
     public ContaResponse encerrar(Long id) {
-        Conta conta = buscarContaPorId(id);
+        Conta conta = buscarContaDoCliente(id);
         conta.encerrar();
         return ContaResponse.from(conta);
     }
 
-    private Conta buscarContaPorId(Long id) {
-        return contaRepository.findById(id)
+    private Conta buscarContaDoCliente(Long id) {
+        Conta conta = contaRepository.findById(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Conta não encontrada"));
+        clienteAutenticado.validarDono(conta.getCliente().getId());
+        return conta;
     }
 
     private String gerarNumeroConta() {

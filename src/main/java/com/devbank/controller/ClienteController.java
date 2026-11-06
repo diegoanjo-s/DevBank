@@ -12,8 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Tag(name = "Clientes", description = "Cadastro de clientes")
 @RestController
 @RequestMapping("/clientes")
@@ -34,12 +32,6 @@ public class ClienteController {
     @GetMapping("/{id}")
     public ClienteResponse buscarPorId(@PathVariable Long id) {
         return clienteService.buscarPorId(id);
-    }
-
-    @Operation(summary = "Lista os clientes")
-    @GetMapping
-    public List<ClienteResponse> listar() {
-        return clienteService.listar();
     }
 
     @Operation(summary = "Atualiza nome e e-mail")

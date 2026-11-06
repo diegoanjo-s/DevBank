@@ -38,6 +38,12 @@ public class GlobalExceptionHandler {
         return new ErroResponse(401, ex.getMessage(), List.of(), LocalDateTime.now());
     }
 
+    @ExceptionHandler(AcessoNegadoException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ErroResponse tratarAcessoNegado(AcessoNegadoException ex) {
+        return new ErroResponse(403, ex.getMessage(), List.of(), LocalDateTime.now());
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErroResponse tratarValidacao(MethodArgumentNotValidException ex) {
