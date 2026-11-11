@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Service
@@ -42,6 +43,14 @@ public class ContaService {
         Conta conta = new Conta(cliente, gerarNumeroConta(), saldoInicial);
         Conta salva = contaRepository.save(conta);
         return ContaResponse.from(salva);
+    }
+
+    @Transactional(readOnly = true)
+    public List<ContaResponse> listarDoClienteLogado() {
+        return contaRepository.findByClienteIdOrderByDataAberturaDesc(clienteAutenticado.id())
+                .stream()
+                .map(ContaResponse::from)
+                .toList();
     }
 
     @Transactional(readOnly = true)

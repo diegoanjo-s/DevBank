@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Tag(name = "Contas", description = "Abertura, consulta e encerramento de contas")
 @RestController
 @RequestMapping("/contas")
@@ -23,6 +25,12 @@ public class ContaController {
     @ResponseStatus(HttpStatus.CREATED)
     public ContaResponse abrir(@RequestBody @Valid AbrirContaRequest request) {
         return contaService.abrir(request);
+    }
+
+    @Operation(summary = "Lista as contas do cliente logado")
+    @GetMapping
+    public List<ContaResponse> listarMinhas() {
+        return contaService.listarDoClienteLogado();
     }
 
     @Operation(summary = "Consulta a conta e o saldo")

@@ -36,6 +36,7 @@ API REST de um banco digital, desenvolvida com **Java 21** e **Spring Boot 4**, 
 | PUT | `/clientes/{id}` | Atualiza nome e e-mail | Sim |
 | DELETE | `/clientes/{id}` | Remove o próprio cadastro | Sim |
 | POST | `/contas` | Abre uma conta | Sim |
+| GET | `/contas` | Lista as contas do cliente logado | Sim |
 | GET | `/contas/{id}` | Consulta a conta e o saldo | Sim |
 | PATCH | `/contas/{id}/encerrar` | Encerra uma conta com saldo zero | Sim |
 | POST | `/contas/{id}/deposito` | Deposita um valor | Sim |
