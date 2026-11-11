@@ -2,6 +2,20 @@
 
 API REST de um banco digital, desenvolvida com **Java 21** e **Spring Boot 4**, com foco em boas práticas de backend: arquitetura em camadas, regras de negócio bancárias, testes e segurança.
 
+## 🌐 Teste online
+
+| | Link |
+|---|---|
+| 🖥️ **Site** (cadastro, login, depósito, saque, transferência e extrato) | [diegoanjo-s.vercel.app](https://diegoanjo-s.vercel.app) |
+| 📖 **Documentação da API** (Swagger) | [devbank-api-grsh.onrender.com/swagger-ui.html](https://devbank-api-grsh.onrender.com/swagger-ui.html) |
+| 🎨 **Código do site** (React + TypeScript) | [diegoanjo-s/portfolio](https://github.com/diegoanjo-s/portfolio) |
+
+> ⏳ A API roda no plano gratuito do Render e "dorme" depois de 15 minutos sem uso. O primeiro acesso pode levar até 1 minuto.
+
+```
+Navegador → Site (Vercel) → API Java (Render, Docker) → PostgreSQL (Neon)
+```
+
 > ⚠️ **Banco fictício, para estudo e portfólio.** O saldo é simulado e não há dinheiro de verdade. Não use dados reais.
 >
 > 📋 Veja o progresso no [ROADMAP](ROADMAP.md) e como a segurança é tratada em [SECURITY.md](SECURITY.md).
@@ -9,13 +23,14 @@ API REST de um banco digital, desenvolvida com **Java 21** e **Spring Boot 4**, 
 ## 🛠️ Tecnologias
 
 - Java 21 e Spring Boot 4 (Web MVC)
-- Spring Data JPA, H2 (desenvolvimento) e PostgreSQL 17 (produção)
+- Spring Data JPA, H2 (desenvolvimento) e PostgreSQL (produção)
 - Flyway para as migrations do banco
 - Spring Security com JWT e senhas protegidas com BCrypt
 - Bean Validation e Swagger (OpenAPI)
 - JUnit 5, Mockito e MockMvc
 - Docker e Docker Compose
 - Maven e Lombok
+- Deploy: Render (API), Neon (PostgreSQL) e Vercel (site)
 
 ## ✨ Funcionalidades
 
