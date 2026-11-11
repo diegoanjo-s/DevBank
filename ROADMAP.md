@@ -2,6 +2,8 @@
 
 API REST de um banco digital com Java 21 + Spring Boot 4 + Maven.
 
+> 🎉 **Projeto concluído — 100% do roadmap entregue** (11 fases + pendências técnicas).
+
 ## Fase 0 — Ambiente ✅
 - [x] Java 21 + Maven
 - [x] Git instalado e configurado
@@ -67,13 +69,13 @@ API REST de um banco digital com Java 21 + Spring Boot 4 + Maven.
 - [x] Docker + Docker Compose
 - [x] Profiles (dev / prod)
 
-## Fase 10 — Segurança
+## Fase 10 — Segurança ✅
 - [x] Spring Security
 - [x] Cadastro e login
 - [x] JWT
 - [x] Proteger endpoints
 - [x] Cada cliente acessa só os próprios dados
 
-## 🛡️ Pendências técnicas
+## 🛡️ Pendências técnicas ✅
 - [x] Atualizar para Spring Boot 4.1.2+ (logback CVE-2026-19880) e remover os overrides de tomcat/jackson
 - [x] Dar permissão de execução ao mvnw (para Linux/Docker/CI)
