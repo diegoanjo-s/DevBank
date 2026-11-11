@@ -14,7 +14,7 @@ public class ClienteAutenticado {
         }
     }
 
-    private Long id() {
+    public Long id() {
         Jwt token = (Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return Long.valueOf(token.getSubject());
     }
