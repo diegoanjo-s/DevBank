@@ -1,5 +1,7 @@
 # 🏦 DevBank
 
+[![CI](https://github.com/diegoanjo-s/DevBank/actions/workflows/ci.yml/badge.svg)](https://github.com/diegoanjo-s/DevBank/actions/workflows/ci.yml)
+
 API REST de um banco digital, desenvolvida com **Java 21** e **Spring Boot 4**, com foco em boas práticas de backend: arquitetura em camadas, regras de negócio bancárias, testes e segurança.
 
 ## 🌐 Teste online
@@ -109,6 +111,8 @@ Este modo começa sem dados: cadastre um cliente em `POST /clientes` para testar
 ```bash
 ./mvnw test
 ```
+
+Os testes também rodam automaticamente no **GitHub Actions** a cada push e a cada pull request ([ver execuções](https://github.com/diegoanjo-s/DevBank/actions)).
 
 ## 👨‍💻 Autor
 
