@@ -5,6 +5,7 @@ import com.devbank.dto.TransferenciaRequest;
 import com.devbank.entity.Cliente;
 import com.devbank.entity.Conta;
 import com.devbank.entity.Transacao;
+import com.devbank.exception.AcessoNegadoException;
 import com.devbank.exception.RecursoNaoEncontradoException;
 import com.devbank.exception.RegraNegocioException;
 import com.devbank.repository.ContaRepository;
@@ -32,6 +33,9 @@ class TransacaoServiceTest {
 
     @Mock
     private TransacaoRepository transacaoRepository;
+
+    @Mock
+    private ClienteAutenticado clienteAutenticado;
 
     @InjectMocks
     private TransacaoService transacaoService;
@@ -101,6 +105,21 @@ class TransacaoServiceTest {
 
         assertThat(origem.getSaldo()).isEqualByComparingTo("100.00");
         assertThat(destino.getSaldo()).isEqualByComparingTo("0");
+        verify(transacaoRepository, never()).save(any());
+    }
+
+    @Test
+    @DisplayName("Quem não é dono da origem não transfere, e nada muda")
+    void naoDeveTransferirSemSerDono() {
+        Conta origem = criarConta("1000.00");
+        when(contaRepository.findById(1L)).thenReturn(Optional.of(origem));
+        doThrow(new AcessoNegadoException()).when(clienteAutenticado).validarDono(any());
+        TransferenciaRequest request = new TransferenciaRequest(1L, 2L, new BigDecimal("100.00"));
+
+        assertThatThrownBy(() -> transacaoService.transferir(request))
+                .isInstanceOf(AcessoNegadoException.class);
+
+        assertThat(origem.getSaldo()).isEqualByComparingTo("1000.00");
         verify(transacaoRepository, never()).save(any());
     }
 }

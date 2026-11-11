@@ -5,13 +5,12 @@ import com.devbank.dto.ClienteResponse;
 import com.devbank.dto.ClienteUpdateRequest;
 import com.devbank.service.ClienteService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Tag(name = "Clientes", description = "Cadastro de clientes")
 @RestController
@@ -21,6 +20,7 @@ public class ClienteController {
 
     private final ClienteService clienteService;
 
+    @SecurityRequirements
     @Operation(summary = "Cadastra um cliente")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -32,12 +32,6 @@ public class ClienteController {
     @GetMapping("/{id}")
     public ClienteResponse buscarPorId(@PathVariable Long id) {
         return clienteService.buscarPorId(id);
-    }
-
-    @Operation(summary = "Lista os clientes")
-    @GetMapping
-    public List<ClienteResponse> listar() {
-        return clienteService.listar();
     }
 
     @Operation(summary = "Atualiza nome e e-mail")

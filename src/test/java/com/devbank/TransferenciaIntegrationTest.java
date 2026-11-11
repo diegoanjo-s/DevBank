@@ -4,11 +4,13 @@ import com.devbank.dto.TransferenciaRequest;
 import com.devbank.exception.RegraNegocioException;
 import com.devbank.repository.ContaRepository;
 import com.devbank.repository.TransacaoRepository;
+import com.devbank.service.ClienteAutenticado;
 import com.devbank.service.TransacaoService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import java.math.BigDecimal;
 
@@ -17,6 +19,9 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 class TransferenciaIntegrationTest {
+
+    @MockitoBean
+    private ClienteAutenticado clienteAutenticado;
 
     @Autowired
     private TransacaoService transacaoService;

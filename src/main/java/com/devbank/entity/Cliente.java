@@ -30,6 +30,9 @@ public class Cliente {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false, length = 60)
+    private String senha;
+
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     @Setter(AccessLevel.NONE)
