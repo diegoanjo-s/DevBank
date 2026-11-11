@@ -26,12 +26,13 @@ Navegador → Site (Vercel) → API Java (Render, Docker) → PostgreSQL (Neon)
 
 - Java 21 e Spring Boot 4 (Web MVC)
 - Spring Data JPA, H2 (desenvolvimento) e PostgreSQL (produção)
-- Flyway para as migrations do banco
+- Flyway para as migrations do banco, com índices medidos via `EXPLAIN ANALYZE` ([ver otimização](docs/otimizacao-sql.md))
 - Spring Security com JWT e senhas protegidas com BCrypt
 - Bean Validation e Swagger (OpenAPI)
 - JUnit 5, Mockito e MockMvc
 - Docker e Docker Compose
 - Maven e Lombok
+- GitHub Actions (integração contínua: testes automáticos a cada push e pull request)
 - Deploy: Render (API), Neon (PostgreSQL) e Vercel (site)
 
 ## ✨ Funcionalidades
